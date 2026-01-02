@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
 import { generateSalt, deriveKey, encryptData, decryptData } from '../core/crypto';
 import { getGlobalSalt, saveGlobalSalt, initDB } from '../core/storage';
 import { useAutoLock } from './useAutoLock';
@@ -36,7 +36,7 @@ export const SecurityProvider = ({ children }: { children: ReactNode }) => {
         checkSetup();
     }, []);
 
-    const lockVault = React.useCallback(() => {
+    const lockVault = useCallback(() => {
         setActiveKey(null);
         setIsAuthenticated(false);
         // Force garbage collection hint (not reachable in JS, but clearing ref helps)

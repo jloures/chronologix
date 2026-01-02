@@ -1,6 +1,5 @@
-import React from 'react';
 import { cn } from '../lib/utils';
-import { EncryptedEntry } from '../core/storage';
+// import type { EncryptedEntry } from '../core/storage';
 
 interface CalendarProps {
     currentDate: Date;

@@ -1,4 +1,4 @@
-import { saveGlobalSalt, saveEntry, getAllData, clearDatabase, EncryptedEntry, getGlobalSalt, initDB } from '../core/storage';
+import { saveGlobalSalt, saveEntry, getAllData, clearDatabase, type EncryptedEntry, getGlobalSalt, initDB } from '../core/storage';
 import { arrayBufferToBase64, base64ToArrayBuffer } from '../core/crypto';
 
 export interface BackupData {
@@ -65,20 +65,20 @@ export async function importData(file: File): Promise<void> {
     await clearDatabase();
 
     // Restore Salt
-    await saveGlobalSalt(base64ToArrayBuffer(data.salt) as Uint8Array);
+    await saveGlobalSalt(new Uint8Array(base64ToArrayBuffer(data.salt)));
 
     // Restore Validator
     const db = await initDB();
     await db.put('meta', {
         ciphertext: base64ToArrayBuffer(data.validator.ciphertext),
-        iv: base64ToArrayBuffer(data.validator.iv) as Uint8Array
+        iv: new Uint8Array(base64ToArrayBuffer(data.validator.iv))
     }, 'validator');
 
     // Restore Entries
     for (const item of data.entries) {
         const entry: EncryptedEntry = {
             ciphertext: base64ToArrayBuffer(item.ciphertext),
-            iv: base64ToArrayBuffer(item.iv) as Uint8Array,
+            iv: new Uint8Array(base64ToArrayBuffer(item.iv)),
         };
         await saveEntry(item.date, entry);
     }

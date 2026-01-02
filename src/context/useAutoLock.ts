@@ -7,7 +7,7 @@ export function useAutoLock(
     lockFn: () => void,
     timeoutMs: number = 10 * 60 * 1000 // 10 minutes
 ) {
-    const timerRef = useRef<NodeJS.Timeout | number>(0);
+    const timerRef = useRef<ReturnType<typeof setTimeout> | number>(0);
 
     const resetTimer = useCallback(() => {
         if (timerRef.current) {
