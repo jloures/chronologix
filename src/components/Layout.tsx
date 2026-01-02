@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { useSecurity } from '../context/SecurityContext';
 import { exportData, importData } from '../utils/backup';
-import { Lock, Download, Upload, LogOut } from 'lucide-react';
-import { cn } from '../lib/utils';
+// import { Lock, Download, Upload, LogOut } from 'lucide-react';
+// import { cn } from '../lib/utils';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
     const { lockVault, isAuthenticated } = useSecurity();
