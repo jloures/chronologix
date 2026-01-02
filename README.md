@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+# Chronologix 🛡️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Chronologix** is a high-security, local-first personal diary and mood tracker. Designed for absolute privacy, it ensures that your thoughts remain yours alone.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **Zero-Knowledge Architecture**: All data is encrypted on your device using **AES-GCM (256-bit)** before it ever touches storage. We cannot see your data.
+*   **Local-First**: Your diary resides in your browser's IndexedDB. No servers, no clouds, no leaks.
+*   **Auto-Lock**: The vault automatically locks after **10 minutes** of inactivity, clearing encryption keys from memory to prevent unauthorized access.
+*   **Mood Tracking**: visual calendar with mood indicators to track your emotional well-being over time.
+*   **Rich Text Editor**: Write freely with Markdown support.
+*   **Data Sovereignty**: Export your entire vault as an encrypted JSON backup. Restore it anywhere, anytime.
 
-## React Compiler
+## Security Model
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   **Encryption**: AES-GCM 256-bit.
+*   **Key Derivation**: PBKDF2-HMAC-SHA256 with 600,000 iterations.
+*   **Storage**: IndexedDB (Browser Local Storage).
+*   **Recovery**: **None.** There is no "Forgot Password". If you lose your password, your data is mathematically inaccessible.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+*   Node.js 18+
+*   npm or yarn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/jloures/chronologix.git
+    cd chronologix
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4.  Open `http://localhost:5173` in your browser.
+
+## Tech Stack
+
+*   **Framework**: React 18 + Vite
+*   **Language**: TypeScript
+*   **Styling**: Tailwind CSS
+*   **Cryptography**: Web Crypto API
+*   **Storage**: idb (IndexedDB wrapper)
+*   **Editor**: react-markdown
+
+## License
+
+MIT
